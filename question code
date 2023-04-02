@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Question</title>
+	<script type="text/javascript">
+		var questions = [
+			{
+				question: "Since porosity is always ________, the Darcy flux is always ________ the flow velocity.",
+				choices: [
+					"Greater than one; less than",
+					"Less than one; greater than",
+					"Equal to one; the same as",
+					"Less than one; less than"
+				],
+				answer: 1
+			},
+			{
+				question: "Question 2?",
+				choices: [
+					"Choice 1",
+					"Choice 2",
+					"Choice 3",
+					"Choice 4"
+				],
+				answer: 2
+			},
+			{
+				question: "Question 3?",
+				choices: [
+					"Choice 1",
+					"Choice 2",
+					"Choice 3",
+					"Choice 4"
+				],
+				answer: 0
+			},
+			{
+				question: "Question 4?",
+				choices: [
+					"Choice 1",
+					"Choice 2",
+					"Choice 3",
+					"Choice 4"
+				],
+				answer: 3
+			}
+		];
+
+		function generateQuestion() {
+			var index = Math.floor(Math.random() * questions.length);
+			var question = questions[index];
+			var choices = question.choices.map(function(choice, index) {
+				return '<input type="radio" name="answer" value="' + index + '">' + choice + '<br>';
+			});
+			var html = '<p>' + question.question + '</p>' + choices.join('');
+			document.getElementById('question').innerHTML = html;
+			document.getElementById('answer').value = question.answer;
+		}
+
+		function checkAnswer() {
+			var answer = document.querySelector('input[name="answer"]:checked').value;
+			var correctAnswer = document.getElementById('answer').value;
+			if (answer === correctAnswer) {
+				alert('Correct!');
+			} else {
+				alert('Incorrect!');
+			}
+			generateQuestion();
+		}
+	</script>
+</head>
+<body onload="generateQuestion();">
+	<div id="question"></div>
+	<input type="hidden" id="answer">
+	<button onclick="checkAnswer();">Submit</button>
+</body>
+</html>
